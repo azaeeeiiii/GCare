@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Latest News – GCare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/news.css">
+</head>
+<body class="news-page">
+
+  <!-- ===== HEADER: back arrow + logo ===== -->
+  <header class="site-header">
+    <div class="header-left">
+      <!-- Goes back to the previous page; falls back to index.html (see js/news.js) -->
+      <a href="index.html" class="back-link" data-back aria-label="Go back">
+        <!-- CUSTOM ICON (SVG): back arrow -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="index.html" class="brand" aria-label="GCare home">
+        <img src="images/logo_gcare.jpg" alt="GCare logo" class="brand-logo">
+        <span class="brand-text">
+          <span class="brand-name">GCare</span>
+          <span class="brand-tag">Your Safety, Our Community.</span>
+        </span>
+      </a>
+    </div>
+    <a href="index.html" class="btn btn-outline-dark header-home">Back to home</a>
+  </header>
+
+  <main>
+    <!-- Title band -->
+    <section class="news-hero">
+      <div class="news-inner">
+        <h1>Latest News</h1>
+      </div>
+    </section>
+
+    <div class="news-inner news-body">
+
+      <!-- Alerts live inside this page (the landing page "See all alerts" button links to news.html#alerts) -->
+      <section id="alerts" class="news-section">
+        <h2>Alerts</h2>
+        <p class="placeholder">Active alerts will appear here.</p>
+      </section>
+
+      <section id="news" class="news-section">
+        <h2>News</h2>
+        <p class="placeholder">News and updates from the GCare team will appear here.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="news.html" aria-current="page">Latest News</a>
+      <a href="emergency-resources.html">Emergency Resources</a>
+      <span class="footer-sep" aria-hidden="true"></span>
+      <a href="about.html">About GCare</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+    </nav>
+    <small class="copyright">&copy; <span class="copyright-year">2026</span> - GCare</small>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/news.js"></script>
+</body>
+</html>
