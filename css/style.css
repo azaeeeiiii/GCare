@@ -1,0 +1,90 @@
+/* ===== GCare - shared styles (used by every page) =====
+   Variables, reset, buttons, brand, header, footer.
+   Page-specific styles live in their own file (landing.css, map.css, ...). */
+:root {
+  --navy: #1b2437;
+  --red: #a00000;
+  --card: #eeeeed;
+  --green: #2ecc40;
+  --header-h: 58px;
+  --footer-h: 52px;
+  --font: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+}
+*, 
+*::before, 
+*::after { 
+    box-sizing: border-box; 
+}
+html, body { margin: 0; }
+body { font-family: var(--font); color: var(--navy); background: #fff; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid #4da3ff; outline-offset: 2px; }
+
+/* ----- Buttons ----- */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 999px; border: 1.5px solid transparent;
+  font: 700 14px/1 var(--font); cursor: pointer; white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.btn .arrow { width: 16px; height: 16px; flex: none; }
+.btn-navy { background: var(--navy); color: #fff; }
+.btn-outline-dark { background: transparent; color: var(--navy); border-color: var(--navy); }
+.btn-outline-light { background: transparent; color: #fff; border-color: #fff; }
+.btn-white { background: #fff; color: var(--navy); }
+
+/* Hover effects only on devices that really hover (mouse/trackpad).
+   Without this, touch screens keep the button "lit" after a tap. */
+@media (hover: hover) {
+  .btn-navy:hover { background: transparent; color: var(--navy); border-color: var(--navy); }
+  .btn-outline-dark:hover { background: var(--navy); color: #fff; }
+  .btn-outline-light:hover { background: #fff; color: var(--red); }
+  .btn-white:hover { background: #f0f0f0; }
+}
+/* Brief press feedback for everyone (clears as soon as the tap ends) */
+.btn:active { transform: scale(.97); }
+.btn { -webkit-tap-highlight-color: transparent; }
+
+/* ----- Brand ----- */
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand-logo { width: 38px; height: 38px; object-fit: contain; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand-name { font-size: 26px; font-weight: 800; letter-spacing: .2px; }
+.brand-tag { font-size: 11px; font-weight: 600; margin-top: 1px; }
+.brand-small .brand-logo { width: 28px; height: 28px; }
+.brand-small .brand-name { font-size: 22px; }
+.brand-small .brand-tag { font-size: 9px; }
+
+/* ----- Header ----- */
+.site-header {
+  height: var(--header-h); padding: 0 24px 0 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: #fff;
+}
+.auth-nav { display: flex; gap: 14px; }
+
+/* ----- Footer ----- */
+.site-footer {
+  min-height: var(--footer-h); padding: 6px 28px 6px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  background: #fff; font-size: 12px; font-weight: 600;
+}
+.footer-nav { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-left: auto; margin-right: 24px; }
+.footer-nav a:hover { text-decoration: underline; }
+.footer-sep { width: 2px; height: 24px; background: var(--navy); }
+.copyright { font-size: 12px; font-weight: 600; }
+
+/* ----- Responsive (header/footer) ----- */
+@media (max-width: 960px) {
+  .site-footer { justify-content: center; text-align: center; padding: 14px; }
+  .footer-nav { margin: 0; justify-content: center; gap: 14px 20px; }
+  .footer-sep { display: none; }
+}
+@media (max-width: 640px) {
+  .site-header { padding: 0 12px; }
+  .brand-name { font-size: 22px; }
+  .brand-tag { display: none; }
+  .auth-nav { gap: 8px; }
+  .auth-nav .btn { padding: 8px 12px; font-size: 13px; }
+}
