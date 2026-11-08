@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,7 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
 
@@ -26,8 +26,8 @@
     </a>
 
     <nav class="auth-nav" aria-label="Account">
-      <a href="signin.html" class="btn btn-outline-dark">Sign in</a>
-      <a href="signup.html" class="btn btn-navy">Create Account</a>
+      <a href="signin.html" class="btn btn-outline-dark" data-auth-open="login">Sign in</a>
+      <a href="signup.html" class="btn btn-navy" data-auth-open="signup">Create Account</a>
     </nav>
   </header>
 
@@ -198,9 +198,147 @@
     </div>
   </dialog>
 
+  <!-- ===== SIGN IN / CREATE ACCOUNT POP-UP ===== -->
+  <dialog id="authModal" class="auth-modal" aria-labelledby="authTitle">
+    <div class="auth-dialog">
+      <button type="button" class="auth-close" aria-label="Close" data-auth-close>&times;</button>
+
+      <!-- Left: form card -->
+      <section class="auth-card">
+        <h2 id="authTitle" class="auth-title">Welcome Back</h2>
+        <p class="auth-sub" id="authSub">Sign in to continue to your GCare Account</p>
+
+        <div class="auth-tabs" role="tablist" data-active="login">
+          <button type="button" role="tab" class="is-active" aria-selected="true" data-auth-tab="login">Log In</button>
+          <button type="button" role="tab" aria-selected="false" data-auth-tab="signup">Sign Up</button>
+        </div>
+
+        <!-- LOG IN -->
+        <form class="auth-form" id="loginForm" novalidate>
+          <label for="loginEmail">Email Address</label>
+          <div class="auth-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+
+          <label for="loginPass">Password</label>
+          <div class="auth-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            <input id="loginPass" type="password" placeholder="Enter your password" autocomplete="current-password">
+            <button type="button" class="auth-eye" aria-label="Show password" data-toggle-pass="loginPass">
+              <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+
+          <div class="auth-row">
+            <label class="auth-check"><input type="checkbox" id="rememberMe"> Remember me</label>
+            <a href="#" class="auth-link" id="forgotLink">Forgot password?</a>
+          </div>
+
+          <p class="auth-error" id="loginError" role="alert"></p>
+          <button type="submit" class="auth-primary">
+            Log In
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+
+        <!-- SIGN UP -->
+        <form class="auth-form" id="signupForm" novalidate hidden>
+          <label for="signName">Full Name</label>
+          <div class="auth-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            <input id="signName" type="text" placeholder="Enter your full name" autocomplete="name">
+          </div>
+
+          <label for="signEmail">Email Address</label>
+          <div class="auth-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <input id="signEmail" type="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+
+          <label for="signPass">Password</label>
+          <div class="auth-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            <input id="signPass" type="password" placeholder="At least 8 characters" autocomplete="new-password">
+            <button type="button" class="auth-eye" aria-label="Show password" data-toggle-pass="signPass">
+              <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+
+          <label for="signConfirm">Confirm Password</label>
+          <div class="auth-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            <input id="signConfirm" type="password" placeholder="Re-enter your password" autocomplete="new-password">
+            <button type="button" class="auth-eye" aria-label="Show password" data-toggle-pass="signConfirm">
+              <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+
+          <label class="auth-check auth-terms">
+            <input type="checkbox" id="signTerms">
+            <span>I agree to the GCare
+              <a href="terms.html" class="auth-link" data-legal="terms">Terms of Use</a> and
+              <a href="privacy.html" class="auth-link" data-legal="privacy">Privacy Policy</a></span>
+          </label>
+
+          <p class="auth-error" id="signupError" role="alert"></p>
+          <button type="submit" class="auth-primary">
+            Create Account
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+
+        <div class="auth-divider"><span>or continue with</span></div>
+        <button type="button" class="auth-google" id="googleBtn">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.1 5.5c4.3-4 6.8-9.9 6.8-16.9z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.1-5.5c-2 1.4-4.7 2.3-8.8 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+          Continue with Google
+        </button>
+
+        <p class="auth-switch" id="authSwitch"></p>
+      </section>
+
+      <!-- Right: welcome panel (hidden on small screens) -->
+      <aside class="auth-side">
+        <h2>Welcome to GCare</h2>
+        <p class="auth-tagline">Your Safety. <em>Our Community.</em></p>
+        <p class="auth-lede">Stay informed, report emergencies, and connect with your community through GCare.</p>
+        <ul>
+          <li>
+            <span class="auth-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4l2-2Z"/><path d="M10 21h4"/></svg></span>
+            <div><strong>Stay Updated</strong><p>Receive important community alerts and safety updates.</p></div>
+          </li>
+          <li>
+            <span class="auth-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17v.5" stroke="#fff"/></svg></span>
+            <div><strong>Report Hazards</strong><p>Help your community by reporting incidents and hazards.</p></div>
+          </li>
+          <li>
+            <span class="auth-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><path d="M6 20c0-3.5 3-5 6-5s6 1.5 6 5M1 19c0-2.5 2-4 4-4M23 19c0-2.5-2-4-4-4"/></svg></span>
+            <div><strong>Find Help</strong><p>Access emergency resources, evacuation centers and community assistance.</p></div>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </dialog>
+
+  <!-- ===== TERMS / PRIVACY POP-UP (content is loaded from terms.html / privacy.html) ===== -->
+  <dialog id="legalModal" class="legal-modal" aria-labelledby="legalTitle">
+    <header class="legal-modal-head">
+      <div>
+        <h3 id="legalTitle">Terms of Use</h3>
+        <p class="legal-modal-date" id="legalDate"></p>
+      </div>
+      <button type="button" class="legal-modal-x" aria-label="Close" data-legal-close>&times;</button>
+    </header>
+    <div class="legal-modal-body" id="legalBody" tabindex="0"></div>
+    <footer class="legal-modal-foot">
+      <button type="button" class="btn btn-navy" data-legal-close>Close</button>
+    </footer>
+  </dialog>
+
   <!-- ===== JAVASCRIPT ===== -->
   <script src="js/script.js"></script>
   <script src="js/landing.js"></script>
+  <script src="js/auth.js"></script>
 
 </body>
 </html>
